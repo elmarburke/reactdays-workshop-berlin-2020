@@ -1,14 +1,16 @@
 import React from "react";
 
-interface Props {}
+interface Props {
+  onMessageSend: (messageText: string) => void;
+}
 
-const MessageCompose: React.FunctionComponent<Props> = () => {
+const MessageCompose: React.FunctionComponent<Props> = ({ onMessageSend }) => {
   const [inputValue, setInput] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    console.log("message");
+    onMessageSend(inputValue);
+    setInput("");
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
