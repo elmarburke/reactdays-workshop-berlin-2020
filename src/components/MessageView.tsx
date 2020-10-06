@@ -9,7 +9,7 @@ const MessageView: React.FunctionComponent<Props> = ({
   message: { message, author },
 }) => {
   return (
-    <article>
+    <article role="listitem article">
       {message}
       <footer>{author}</footer>
     </article>
