@@ -1,21 +1,24 @@
-import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Message } from "../domain";
+import { State, addMessage } from "../configureStore";
 
 const useMessages = () => {
-  const [state, setState] = React.useState<readonly Message[]>([]);
+  const messages = useSelector((state: State) => state.messages);
+  const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    fetch("/messages.json")
-      .then((response) => response.json())
-      .then((data) => setState(data));
-  }, []);
+  // const [, setState] = React.useState<readonly Message[]>([]);
+
+  // React.useEffect(() => {
+  //   fetch("/messages.json")
+  //     .then((response) => response.json())
+  //     .then((data) => setState(data));
+  // }, []);
 
   const sendMessage = (message: Message): void => {
-    // demnaechst noch HTTP Post etc...
-    setState((oldState) => [...oldState, message]);
+    dispatch(addMessage(message));
   };
 
-  return { messages: state, sendMessage };
+  return { messages, sendMessage };
 };
 
 export default useMessages;

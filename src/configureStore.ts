@@ -12,7 +12,7 @@ export const addMessage = (message: Message) => ({
 
 /* Reducer */
 
-interface State {
+export interface State {
   readonly messages: readonly Message[];
 }
 
