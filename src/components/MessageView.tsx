@@ -1,6 +1,6 @@
 import React from "react";
 // $ yarn add @types/styled-components
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Message } from "../domain";
 
 const MessageItem = styled.article`
