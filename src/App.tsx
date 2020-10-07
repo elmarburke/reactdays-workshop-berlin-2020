@@ -3,14 +3,8 @@ import MessageCompose from "./components/MessageCompose";
 import MessageList from "./components/MessageList";
 import { Message } from "./domain";
 
-const messages: Message[] = [
-  { id: "a", author: "Christian", message: "Das bin ich (nicht)", date: 2 },
-  { id: "b", author: "Elmar", message: "Das bin ich (nicht)", date: 3 },
-  { id: "c", author: "Christian", message: "Wohl!", date: 4 },
-];
-
 function App() {
-  const [state, setState] = React.useState(messages);
+  const [state, setState] = React.useState<readonly Message[]>([]);
 
   React.useEffect(() => {
     fetch("/messages.json")

@@ -3,7 +3,7 @@ import { Message } from "../domain";
 import MessageView from "./MessageView";
 
 interface Props {
-  messages: Message[];
+  messages: readonly Message[];
 }
 
 const MessageList: React.FunctionComponent<Props> = ({ messages }) => {
