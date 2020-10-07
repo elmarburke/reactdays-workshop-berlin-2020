@@ -8,7 +8,16 @@ interface Props {
 
 const MessageList: React.FunctionComponent<Props> = ({ messages }) => {
   return (
-    <div role="list">
+    <div
+      role="list"
+      style={{
+        borderColor: "papayawhip",
+        borderStyle: "solid",
+        borderWidth: 1,
+
+        padding: ".5rem",
+      }}
+    >
       {messages.map((message) => (
         <MessageView key={message.id} message={message} />
       ))}
