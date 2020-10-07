@@ -1,5 +1,6 @@
-import { createStore } from "redux";
+import { createStore, Dispatch } from "redux";
 import { Message } from "./domain";
+import { useDispatch } from "react-redux";
 
 /* Actions */
 
@@ -22,7 +23,7 @@ interface LoadMassageSucceeded {
   };
 }
 
-type Action = AddMessage | LoadMassageSucceeded;
+export type Action = AddMessage | LoadMassageSucceeded;
 
 export const addMessage = (message: Message): AddMessage => ({
   type: ADD_MESSAGE,
@@ -73,3 +74,11 @@ const configureStore = () => {
 };
 
 export default configureStore;
+
+/* custom hooks */
+
+export const useOurDispatch = () => {
+  const dispatch = useDispatch<Dispatch<Action>>();
+
+  return dispatch;
+};
