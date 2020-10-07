@@ -13,8 +13,6 @@ function App() {
   const [state, setState] = React.useState(messages);
 
   const handleMessageSend = (text: string) => {
-    console.log("new message", text);
-
     const newMessage = {
       author: "elmar",
       message: text,
@@ -25,11 +23,19 @@ function App() {
     setState((oldState) => [...oldState, newMessage]);
   };
 
+  const handleRemoveChristiansMessages = () => {
+    setState((oldMessages) =>
+      oldMessages.filter((message) => message.author !== "Christian")
+    );
+  };
+
   return (
     <>
       <MessageList messages={state} />
-
       <MessageCompose onMessageSend={handleMessageSend} />
+      <button onClick={handleRemoveChristiansMessages}>
+        Entferne Christians Nachrichten
+      </button>
     </>
   );
 }
