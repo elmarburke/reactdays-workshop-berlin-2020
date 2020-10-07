@@ -1,16 +1,10 @@
 import React from "react";
 import MessageCompose from "./components/MessageCompose";
 import MessageList from "./components/MessageList";
-import { Message } from "./domain";
+import useMessages from "./hooks/useMessages";
 
 function App() {
-  const [state, setState] = React.useState<readonly Message[]>([]);
-
-  React.useEffect(() => {
-    fetch("/messages.json")
-      .then((response) => response.json())
-      .then((data) => setState(data));
-  }, []);
+  const { messages, sendMessage } = useMessages();
 
   const handleMessageSend = (text: string) => {
     const newMessage = {
@@ -20,22 +14,13 @@ function App() {
       date: Date.now(),
     };
 
-    setState((oldState) => [...oldState, newMessage]);
-  };
-
-  const handleRemoveChristiansMessages = () => {
-    setState((oldMessages) =>
-      oldMessages.filter((message) => message.author !== "Christian")
-    );
+    sendMessage(newMessage);
   };
 
   return (
     <>
-      <MessageList messages={state} />
+      <MessageList messages={messages} />
       <MessageCompose onMessageSend={handleMessageSend} />
-      <button onClick={handleRemoveChristiansMessages}>
-        Entferne Christians Nachrichten
-      </button>
     </>
   );
 }
