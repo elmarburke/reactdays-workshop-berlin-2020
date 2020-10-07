@@ -4,5 +4,6 @@
     "message": "baz",
     "author": "Elmar",
     "date": 1570699374935
-  }
+  },
+  { "id": "1234", "message": "Hallo Welt", "author": "Christian", "date": 3 }
 ]

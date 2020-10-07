@@ -12,6 +12,12 @@ const messages: Message[] = [
 function App() {
   const [state, setState] = React.useState(messages);
 
+  React.useEffect(() => {
+    fetch("/messages.json")
+      .then((response) => response.json())
+      .then((data) => setState(data));
+  }, []);
+
   const handleMessageSend = (text: string) => {
     const newMessage = {
       author: "elmar",
