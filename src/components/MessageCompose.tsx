@@ -19,7 +19,9 @@ const MessageCompose: React.FunctionComponent<Props> = ({ onMessageSend }) => {
 
   return (
     <form onSubmit={handleSubmit} className="message-compose">
+      <label htmlFor="message-text">Message Text</label>
       <input
+        id="message-text"
         onChange={handleChange}
         value={inputValue}
         className="message-compose--message-text"
