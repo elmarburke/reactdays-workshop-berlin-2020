@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 // $ npm install @types/react-redux
 import { Provider } from "react-redux";
 import App from "./App";
+import "./index.css";
 
 import configureStore, { addMessage } from "./configureStore";
 

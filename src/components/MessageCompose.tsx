@@ -18,10 +18,14 @@ const MessageCompose: React.FunctionComponent<Props> = ({ onMessageSend }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input onChange={handleChange} value={inputValue} />
+    <form onSubmit={handleSubmit} className="message-compose">
+      <input
+        onChange={handleChange}
+        value={inputValue}
+        className="message-compose--message-text"
+      />
       <button type="submit">Absenden</button>
-      <p>aktuell in state: {inputValue}</p>
+      <p>aktuell im state: {inputValue}</p>
     </form>
   );
 };

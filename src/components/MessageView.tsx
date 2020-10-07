@@ -7,10 +7,8 @@ const MessageItem = styled.article`
   font-family: "Comic Sans MS", "Helvetica", sans-serif;
   color: hotpink;
 
-  border-bottom: 1px black solid;
-
   & + & {
-    border-bottom: none;
+    border-top: 1px black solid;
   }
 `;
 
