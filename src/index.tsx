@@ -8,8 +8,9 @@ import "./index.css";
 
 import configureStore from "./configureStore";
 import { addMessage } from "./redux/messages/actions";
+import { PersistGate } from "redux-persist/integration/react";
 
-const store = configureStore();
+const { store, persistor } = configureStore();
 
 // @ts-ignore
 window.store = store;
@@ -34,7 +35,9 @@ window.store = store;
 
 const element = (
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
 
