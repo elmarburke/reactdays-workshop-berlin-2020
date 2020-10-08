@@ -21,7 +21,7 @@ describe("<MessageView />", () => {
 
     expect(message).toMatchInlineSnapshot(`
       <article
-        class="MessageView__MessageItem-sc-1bkojwi-0 glegGI"
+        class="MessageView__MessageItem-sc-1bkojwi-0 bbAVOL"
         role="listitem article"
       >
         Hallo Welt
