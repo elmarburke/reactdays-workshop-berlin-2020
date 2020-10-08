@@ -14,23 +14,23 @@ const store = configureStore();
 // @ts-ignore
 window.store = store;
 
-store.dispatch(
-  addMessage({
-    id: `${Date.now()}-1`,
-    author: "Christian",
-    message: "Hallo Welt",
-    date: Date.now(),
-  })
-);
+// store.dispatch(
+//   addMessage({
+//     id: `${Date.now()}-1`,
+//     author: "Christian",
+//     message: "Hallo Welt",
+//     date: Date.now(),
+//   })
+// );
 
-store.dispatch(
-  addMessage({
-    id: `${Date.now()}-2`,
-    author: "Elmar",
-    message: "Hallo Welt",
-    date: Date.now(),
-  })
-);
+// store.dispatch(
+//   addMessage({
+//     id: `${Date.now()}-2`,
+//     author: "Elmar",
+//     message: "Hallo Welt",
+//     date: Date.now(),
+//   })
+// );
 
 const element = (
   <Provider store={store}>
