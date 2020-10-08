@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 import { Message } from "../domain";
 
 const MessageItem = styled.article`
-  font-family: "Comic Sans MS", "Helvetica", sans-serif;
+  font-family: "Helvetica", sans-serif;
   color: hotpink;
 
   & + & {
