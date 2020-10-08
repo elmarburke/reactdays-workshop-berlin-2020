@@ -1,6 +1,8 @@
-import { createStore, Dispatch } from "redux";
+import { applyMiddleware, createStore, Dispatch } from "redux";
 import { Message } from "./domain";
 import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import thunk from "redux-thunk";
 
 /* Actions */
 
@@ -66,11 +68,10 @@ const reducer = (state = initialState, action: Action): State => {
 };
 
 const configureStore = () => {
-  return createStore(
-    reducer,
+  const composeEnhancers =
     // @ts-ignore yolo
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  return createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 };
 
 export default configureStore;
@@ -78,7 +79,7 @@ export default configureStore;
 /* custom hooks */
 
 export const useOurDispatch = () => {
-  const dispatch = useDispatch<Dispatch<Action>>();
+  const dispatch = useDispatch<ThunkDispatch<State, unknown, Action>>();
 
   return dispatch;
 };
