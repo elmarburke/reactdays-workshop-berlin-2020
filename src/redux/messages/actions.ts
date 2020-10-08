@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 /* Actions */
 
 import { Message } from "../../domain";
@@ -49,3 +50,60 @@ export const loadMessageSucceeded = (
   type: LOAD_MESSAGE_SUCCEEDED,
   payload: { messages },
 });
+
+export const fetchAllMessagesFromServer = () => (
+  dispatch: Dispatch<Action>
+) => {
+  fetch("/messages.json")
+    .then((response) => response.json())
+    .then((data: unknown) => {
+      // in einer echten anwendung gucken wir ob die daten so sind wie es uns versprochen wurde.
+      // => TS ist nur zur Development time
+
+      if (!Array.isArray(data)) {
+        throw new TypeError("Data is not an array");
+      }
+
+      if (
+        !data.every((item) => {
+          return (
+            typeof item.id === "string" && typeof item.message === "string"
+          );
+        })
+      ) {
+        throw new TypeError("Data items are not valid");
+      }
+
+      dispatch(loadMessageSucceeded(data));
+    });
+};
+
+// // Action Creator mit thunk in langer schreibweise
+// export const fetchAllMessagesFromServer = function () {
+//   return function (dispatch: any) {
+//     setInterval(function () {
+//       dispatch({ type: "Hello World" });
+//     }, 1000);
+//   };
+// };
+
+// Action Creator mit thunk in kurzer schreibweise
+// export const fetchAllMessagesFromServer = () => (dispatch: any) => {
+//   setInterval(() => {
+//     dispatch({ type: "Hello World" });
+//   }, 1000);
+// };
+
+// // Beispiel für Jan
+// export const fetchAllMessagesFromServer3 = () => (dispatch: Dispatch<any>) => {
+//   dispatch({ type: "MESSAGE_LOAD_STARTED" });
+
+//   fetch("/messages.json")
+//     .then((response) => response.json())
+//     .then((data) => {
+//       dispatch({ type: "MESSAGE_LOAD_SUCCEEDED", data: data });
+//     })
+//     .catch(() => {
+//       dispatch({ type: "MESSAGE_LOAD_FAILED" });
+//     });
+// };

@@ -1,13 +1,16 @@
-import { createStore, Dispatch } from "redux";
+import { applyMiddleware, createStore, Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import applicationReducer from "./redux/reducer";
 import { Action } from "./redux/messages/actions";
+import thunk from "redux-thunk";
 
 const configureStore = () => {
+  const composeEnhancers =
+    // @ts-ignore yolo
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   return createStore(
     applicationReducer,
-    // @ts-ignore yolo
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(applyMiddleware(thunk))
   );
 };
 
