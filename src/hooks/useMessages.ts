@@ -2,14 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Message } from "../domain";
 import {
-  State,
   addMessage,
   loadMessageSucceeded,
   useOurDispatch,
+  getAllMessages,
 } from "../configureStore";
 
 const useMessages = () => {
-  const messages = useSelector((state: State) => state.messages);
+  const messages = useSelector(getAllMessages);
   const dispatch = useOurDispatch();
 
   // const [, setState] = React.useState<readonly Message[]>([]);

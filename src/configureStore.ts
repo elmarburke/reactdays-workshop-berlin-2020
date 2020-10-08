@@ -65,6 +65,8 @@ const reducer = (state = initialState, action: Action): State => {
   return state;
 };
 
+export const getAllMessages = (state: State) => state.messages;
+
 const configureStore = () => {
   return createStore(
     reducer,
