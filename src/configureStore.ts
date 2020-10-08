@@ -1,8 +1,8 @@
 import { applyMiddleware, createStore, Dispatch } from "redux";
 import { useDispatch } from "react-redux";
-import applicationReducer from "./redux/reducer";
+import applicationReducer, { ApplicationState } from "./redux/reducer";
 import { Action } from "./redux/messages/actions";
-import thunk from "redux-thunk";
+import thunk, { ThunkDispatch } from "redux-thunk";
 
 const configureStore = () => {
   const composeEnhancers =
@@ -19,7 +19,9 @@ export default configureStore;
 /* custom hooks */
 
 export const useOurDispatch = () => {
-  const dispatch = useDispatch<Dispatch<Action>>();
+  const dispatch = useDispatch<
+    ThunkDispatch<ApplicationState, unknown, Action>
+  >();
 
   return dispatch;
 };
