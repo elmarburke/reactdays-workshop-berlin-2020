@@ -6,8 +6,15 @@ const typeDefs = gql`
   type Message {
     id: ID!
     text: String!
-    author: String!
+    author: Person!
     createdAt: Date!
+  }
+
+  type Person {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String
   }
 
   type Query {
@@ -15,7 +22,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    sendMessage(text: String!, author: String!): Message!
+    sendMessage(text: String!, authorId: ID!): Message!
   }
 `;
 

@@ -7,13 +7,18 @@ const resolvers = {
     },
   },
   Mutation: {
-    sendMessage: async (_, { text, author }, { dataSources }) => {
+    sendMessage: async (_, { text, authorId }, { dataSources }) => {
       const newMessage = await dataSources.messageApi.sendMessage({
         text,
-        author,
+        authorId,
       });
 
       return newMessage;
+    },
+  },
+  Message: {
+    author: async ({ dataValues }, _, { dataSources }) => {
+      return dataSources.personApi.getPerson(dataValues.authorId);
     },
   },
 };

@@ -9,10 +9,10 @@ class MessageApi {
     return messages;
   }
 
-  async sendMessage({text, author}) {
+  async sendMessage({ text, authorId }) {
     const message = await this.store.messages.create({
       text,
-      author,
+      authorId,
     });
 
     return message;

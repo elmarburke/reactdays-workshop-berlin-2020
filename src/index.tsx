@@ -9,12 +9,10 @@ import "./index.css";
 import configureStore from "./configureStore";
 import { addMessage } from "./redux/messages/actions";
 import { PersistGate } from "redux-persist/integration/react";
+import configureApollo from "./configureApollo";
+import { ApolloProvider } from "@apollo/client";
 
-const { store, persistor } = configureStore();
-
-// @ts-ignore
-window.store = store;
-
+// const { store, persistor } = configureStore();
 // store.dispatch(
 //   addMessage({
 //     id: `${Date.now()}-1`,
@@ -32,13 +30,16 @@ window.store = store;
 //     date: Date.now(),
 //   })
 // );
+const apolloClient = configureApollo();
 
 const element = (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <App />
-    </PersistGate>
-  </Provider>
+  // <Provider store={store}>
+  // <PersistGate loading={null} persistor={persistor}>
+  <ApolloProvider client={apolloClient}>
+    <App />
+  </ApolloProvider>
+  // </PersistGate>
+  // </Provider>
 );
 
 ReactDOM.render(element, document.getElementById("root"));

@@ -1,9 +1,11 @@
 import React from "react";
-import { Message } from "../domain";
-import MessageView from "./MessageView";
+import { Message } from "../generated/graphql";
+import MessageView, { MessageViewProps } from "./MessageView";
+
+type MessageItem = MessageViewProps["message"] & Pick<Message, "id">;
 
 interface Props {
-  messages: readonly Message[];
+  messages: readonly (MessageItem | null)[];
 }
 
 const MessageList: React.FunctionComponent<Props> = ({ messages }) => {
@@ -18,9 +20,13 @@ const MessageList: React.FunctionComponent<Props> = ({ messages }) => {
         padding: ".5rem",
       }}
     >
-      {messages.map((message) => (
-        <MessageView key={message.id} message={message} />
-      ))}
+      {messages.map((message) =>
+        message === null ? (
+          <div style={{ color: "red" }}>Message not found </div>
+        ) : (
+          <MessageView key={message.id} message={message} />
+        )
+      )}
     </div>
   );
 };

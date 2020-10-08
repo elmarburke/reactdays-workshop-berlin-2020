@@ -37,7 +37,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "backend": "json-server --watch database.json -p 4712"
+    "backend": "json-server --watch database.json -p 4712",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -55,6 +56,9 @@
     ]
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.17.10"
+    "@graphql-codegen/cli": "1.17.10",
+    "@graphql-codegen/typescript-react-apollo": "2.0.7",
+    "@graphql-codegen/typescript": "1.17.10",
+    "@graphql-codegen/typescript-operations": "1.17.8"
   }
 }

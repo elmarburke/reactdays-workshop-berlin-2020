@@ -1,7 +1,7 @@
 import React from "react";
 // $ yarn add @types/styled-components
 import styled from "styled-components/macro";
-import { Message } from "../domain";
+import { Message } from "../generated/graphql";
 
 const MessageItem = styled.article`
   font-family: "Helvetica", sans-serif;
@@ -12,16 +12,16 @@ const MessageItem = styled.article`
   }
 `;
 
-interface Props {
-  message: Message;
+export interface MessageViewProps {
+  message: Pick<Message, "text" | "author">;
 }
 
-const MessageView: React.FunctionComponent<Props> = ({
-  message: { message, author },
+const MessageView: React.FunctionComponent<MessageViewProps> = ({
+  message: { text, author },
 }) => {
   return (
     <MessageItem role="listitem article">
-      {message}
+      {text}
       <footer>{author}</footer>
     </MessageItem>
   );

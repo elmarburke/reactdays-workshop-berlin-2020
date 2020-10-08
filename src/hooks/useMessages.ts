@@ -1,30 +1,35 @@
-import React from "react";
-import { useSelector } from "react-redux";
 import { Message } from "../domain";
-import { useOurDispatch } from "../configureStore";
-import { getAllMessages } from "../redux/messages/reducer";
 import {
-  addMessage,
-  fetchAllMessagesFromServer,
-  loadMessageSucceeded,
-} from "../redux/messages/actions";
+  useAllMessagesQuery,
+  useSendMessageMutation,
+} from "../generated/graphql";
 
 const useMessages = () => {
-  const messages = useSelector(getAllMessages);
-  const dispatch = useOurDispatch();
+  const { data, loading, error, refetch } = useAllMessagesQuery();
+  const [sendMessageToGraphQl] = useSendMessageMutation({
+    // refetchQueries: ["AllMessages"],
+    onCompleted: () => {
+      refetch();
+    },
+  });
 
-  // const [, setState] = React.useState<readonly Message[]>([]);
-
-  React.useEffect(() => {
-    // @ts-ignore
-    dispatch(fetchAllMessagesFromServer());
-  }, [dispatch]);
+  if (error) {
+    throw error;
+  }
 
   const sendMessage = (message: Message): void => {
-    dispatch(addMessage(message));
+    sendMessageToGraphQl({
+      variables: {
+        author: message.author,
+        text: message.message,
+      },
+    });
   };
 
-  return { messages, sendMessage };
+  return {
+    messages: data?.messages ?? [],
+    sendMessage,
+  };
 };
 
 export default useMessages;
