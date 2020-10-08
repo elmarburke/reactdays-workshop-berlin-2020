@@ -52,7 +52,7 @@ export const loadMessageSucceeded = (
 export const fetchAllMessagesFromServer = () => ({
   type: "FETCH_MESSAGES",
   isApiRequest: true,
-  url: "/messages.json",
+  url: "/messages",
 });
 
 export const fetchAllMessagesFromServerOld = () => (

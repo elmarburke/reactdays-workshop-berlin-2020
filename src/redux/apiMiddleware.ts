@@ -7,14 +7,22 @@
 const apiMiddleware = (store: any) => (next: any) => (action: any) => {
   if (action.isApiRequest) {
     store.dispatch({ type: `${action.type}_LOADING` });
-    fetch(action.url)
+    fetch(`http://localhost:4712${action.url}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        store.dispatch({
-          type: `${action.type}_SUCCEEDED`,
-          payload: data,
-        });
+        if (action.property) {
+          store.dispatch({
+            type: `${action.type}_SUCCEEDED`,
+            payload: {
+              [action.property]: data,
+            },
+          });
+        } else {
+          store.dispatch({
+            type: `${action.type}_SUCCEEDED`,
+            payload: data,
+          });
+        }
       });
     return;
   }
