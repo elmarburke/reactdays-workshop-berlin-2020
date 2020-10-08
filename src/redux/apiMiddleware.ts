@@ -34,6 +34,10 @@ const apiMiddleware = (store: any) => (next: any) => (action: any) => {
       })
       .catch((response) => {
         store.dispatch({
+          type: "ADD_ENTRY_TO_API_REQUEST_QUEUE",
+          payload: action,
+        });
+        store.dispatch({
           type: `${action.type}_FAILED`,
           response: response.statusCode,
         });
