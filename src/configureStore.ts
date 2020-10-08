@@ -1,8 +1,9 @@
-import { applyMiddleware, createStore, Dispatch } from "redux";
+import { applyMiddleware, createStore, Dispatch, compose } from "redux";
 import { useDispatch } from "react-redux";
 import applicationReducer, { ApplicationState } from "./redux/reducer";
 import { Action } from "./redux/messages/actions";
 import thunk, { ThunkDispatch } from "redux-thunk";
+import apiMiddleware from "./redux/apiMiddleware";
 
 const configureStore = () => {
   const composeEnhancers =
@@ -10,7 +11,7 @@ const configureStore = () => {
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   return createStore(
     applicationReducer,
-    composeEnhancers(applyMiddleware(thunk))
+    composeEnhancers(applyMiddleware(apiMiddleware), applyMiddleware(thunk))
   );
 };
 

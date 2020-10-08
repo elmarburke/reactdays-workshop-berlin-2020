@@ -16,6 +16,7 @@ const useMessages = () => {
   // const [, setState] = React.useState<readonly Message[]>([]);
 
   React.useEffect(() => {
+    // @ts-ignore
     dispatch(fetchAllMessagesFromServer());
   }, [dispatch]);
 

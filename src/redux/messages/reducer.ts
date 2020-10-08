@@ -1,7 +1,7 @@
 /* Reducer */
 
 import { Message } from "../../domain";
-import { Action, ADD_MESSAGE, LOAD_MESSAGE_SUCCEEDED } from "./actions";
+import { Action, ADD_MESSAGE, FETCH_MESSAGES_SUCCEEDED } from "./actions";
 import { ApplicationState } from "../reducer";
 
 export interface MessagesState {
@@ -23,10 +23,10 @@ const messagesReducer = (
     };
   }
 
-  if (action.type === LOAD_MESSAGE_SUCCEEDED) {
+  if (action.type === FETCH_MESSAGES_SUCCEEDED) {
     return {
       ...state,
-      messages: action.payload.messages,
+      messages: action.payload,
     };
   }
 

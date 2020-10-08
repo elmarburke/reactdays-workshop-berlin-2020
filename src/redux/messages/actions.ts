@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import { Message } from "../../domain";
 
 export const ADD_MESSAGE = "ADD_MESSAGE";
-export const LOAD_MESSAGE_SUCCEEDED = "LOAD_MESSAGE_SUCCEEDED";
+export const FETCH_MESSAGES_SUCCEEDED = "FETCH_MESSAGES_SUCCEEDED";
 
 interface AddMessage {
   //oder: type: typeof ADD_MESSAGE
@@ -15,14 +15,12 @@ interface AddMessage {
   };
 }
 
-interface LoadMassageSucceeded {
-  type: typeof LOAD_MESSAGE_SUCCEEDED;
-  payload: {
-    messages: readonly Message[];
-  };
+interface FetchMessagesSucceeded {
+  type: typeof FETCH_MESSAGES_SUCCEEDED;
+  payload: readonly Message[];
 }
 
-export type Action = AddMessage | LoadMassageSucceeded;
+export type Action = AddMessage | FetchMessagesSucceeded;
 
 export const addMessage = (message: Message): AddMessage => ({
   type: ADD_MESSAGE,
@@ -46,17 +44,20 @@ export const addMessageFromNow = (
 
 export const loadMessageSucceeded = (
   messages: readonly Message[]
-): LoadMassageSucceeded => ({
-  type: LOAD_MESSAGE_SUCCEEDED,
-  payload: { messages },
+): FetchMessagesSucceeded => ({
+  type: FETCH_MESSAGES_SUCCEEDED,
+  payload: messages,
 });
 
-export const fetchAllMessagesFromServer = () => (
-  dispatch: Dispatch<Action>,
-  getState: any,
-  extraArgument: any
+export const fetchAllMessagesFromServer = () => ({
+  type: "FETCH_MESSAGES",
+  isApiRequest: true,
+  url: "/messages.json",
+});
+
+export const fetchAllMessagesFromServerOld = () => (
+  dispatch: Dispatch<Action>
 ) => {
-  console.log(getState());
   fetch("/messages.json")
     .then((response) => response.json())
     .then((data: unknown) => {
