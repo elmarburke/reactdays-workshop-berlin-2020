@@ -52,8 +52,11 @@ export const loadMessageSucceeded = (
 });
 
 export const fetchAllMessagesFromServer = () => (
-  dispatch: Dispatch<Action>
+  dispatch: Dispatch<Action>,
+  getState: any,
+  extraArgument: any
 ) => {
+  console.log(getState());
   fetch("/messages.json")
     .then((response) => response.json())
     .then((data: unknown) => {
