@@ -28,6 +28,21 @@ export const addMessage = (message: Message): AddMessage => ({
   payload: { message },
 });
 
+export const addMessageFromNow = (
+  message: string,
+  author: string
+): AddMessage => ({
+  type: "ADD_MESSAGE",
+  payload: {
+    message: {
+      date: Date.now(),
+      id: `${Date.now()}`,
+      author,
+      message,
+    },
+  },
+});
+
 export const loadMessageSucceeded = (
   messages: readonly Message[]
 ): LoadMassageSucceeded => ({
