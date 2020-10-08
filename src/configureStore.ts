@@ -32,6 +32,31 @@ export const addMessage = (message: Message): AddMessage => ({
   payload: { message },
 });
 
+export const fetchMessages = () => async (dispatch: Dispatch<Action>) => {
+  fetch("/messages.json")
+    .then((response) => response.json())
+    .then((data: unknown) => {
+      // in einer echten anwendung gucken wir ob die daten so sind wie es uns versprochen wurde.
+      // => TS ist nur zur Development time
+
+      if (!Array.isArray(data)) {
+        throw new TypeError("Data is not an array");
+      }
+
+      if (
+        !data.every((item) => {
+          return (
+            typeof item.id === "string" && typeof item.message === "string"
+          );
+        })
+      ) {
+        throw new TypeError("Data items are not valid");
+      }
+      //data.forEach((message) => dispatch(addMessage(message)));
+      dispatch(loadMessageSucceeded(data));
+    });
+};
+
 export const loadMessageSucceeded = (
   messages: readonly Message[]
 ): LoadMassageSucceeded => ({
