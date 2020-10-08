@@ -23,6 +23,13 @@ const messagesReducer = (
     };
   }
 
+  if (action.type === "ADD_MESSAGE_SUCCEEDED") {
+    return {
+      ...state,
+      messages: [...state.messages, action.payload.message],
+    };
+  }
+
   if (action.type === FETCH_MESSAGES_SUCCEEDED) {
     return {
       ...state,

@@ -14,16 +14,34 @@ interface AddMessage {
     message: Message;
   };
 }
+interface AddMessageSucceeded {
+  type: "ADD_MESSAGE_SUCCEEDED";
+
+  payload: {
+    message: Message;
+  };
+}
 
 interface FetchMessagesSucceeded {
   type: typeof FETCH_MESSAGES_SUCCEEDED;
   payload: readonly Message[];
 }
 
-export type Action = AddMessage | FetchMessagesSucceeded;
+export type Action = AddMessage | FetchMessagesSucceeded | AddMessageSucceeded;
+
+// export const addMessage = (message: Message): AddMessage => ({
+//   type: ADD_MESSAGE,
+//   payload: { message },
+// });
 
 export const addMessage = (message: Message): AddMessage => ({
   type: ADD_MESSAGE,
+  // @ts-ignore
+  isApiRequest: true,
+  property: "message",
+  url: "/messages",
+  method: "POST",
+  data: message,
   payload: { message },
 });
 
