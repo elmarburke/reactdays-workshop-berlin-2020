@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 import App from "./App";
 import "./index.css";
 
-import configureStore, { addMessage } from "./configureStore";
+import configureStore from "./configureStore";
+import { addMessage } from "./redux/messages/actions";
 
 const store = configureStore();
 

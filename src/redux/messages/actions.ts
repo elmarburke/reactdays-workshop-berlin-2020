@@ -1,6 +1,6 @@
 /* Actions */
 
-import { Message } from "../domain";
+import { Message } from "../../domain";
 
 export const ADD_MESSAGE = "ADD_MESSAGE";
 export const LOAD_MESSAGE_SUCCEEDED = "LOAD_MESSAGE_SUCCEEDED";

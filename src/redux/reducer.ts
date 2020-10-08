@@ -1,34 +1,16 @@
-/* Reducer */
+import authorsReducer from "./authors/reducer";
+import messagesReducer, { MessagesState } from "./messages/reducer";
 
-import { Message } from "../domain";
-import { Action, ADD_MESSAGE, LOAD_MESSAGE_SUCCEEDED } from "./actions";
-
-export interface State {
-  readonly messages: readonly Message[];
+export interface ApplicationState {
+  messages: MessagesState;
+  authors: any;
 }
 
-const initialState: State = {
-  messages: [],
+const applicationReducer = (state: any = {}, action: any) => {
+  return {
+    messages: messagesReducer(state.messages, action),
+    authors: authorsReducer(state.authors, action),
+  };
 };
-
-const applicationReducer = (state = initialState, action: Action): State => {
-  if (action.type === ADD_MESSAGE) {
-    return {
-      ...state,
-      messages: [...state.messages, action.payload.message],
-    };
-  }
-
-  if (action.type === LOAD_MESSAGE_SUCCEEDED) {
-    return {
-      ...state,
-      messages: action.payload.messages,
-    };
-  }
-
-  return state;
-};
-
-export const getAllMessages = (state: State) => state.messages;
 
 export default applicationReducer;

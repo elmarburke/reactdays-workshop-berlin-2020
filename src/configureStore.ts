@@ -1,7 +1,7 @@
 import { createStore, Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import applicationReducer from "./redux/reducer";
-import { Action } from "./redux/actions";
+import { Action } from "./redux/messages/actions";
 
 const configureStore = () => {
   return createStore(
